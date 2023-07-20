@@ -1,11 +1,18 @@
 {
   "shares": [
     {
-      "company": "dsfgsfdg",
+      "company": "AAPL",
       "quantity": 0,
-      "price": "TBD",
+      "price": 195.08501,
       "exchange": "TBD",
       "id": 1
+    },
+    {
+      "company": "AACT",
+      "quantity": 0,
+      "price": 10.16,
+      "exchange": "TBD",
+      "id": 2
     }
   ]
 }
