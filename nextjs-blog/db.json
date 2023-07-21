@@ -1,18 +1,35 @@
 {
   "shares": [
     {
+      "company": "Coles Group Ltd.",
+      "quantity": "3",
+      "price": "TBD",
+      "exchange": "",
+      "id": 5
+    },
+    {
       "company": "AAPL",
       "quantity": 0,
-      "price": 195.08501,
       "exchange": "TBD",
       "id": 1
     },
     {
       "company": "AACT",
       "quantity": 0,
-      "price": 10.16,
       "exchange": "TBD",
       "id": 2
+    },
+    {
+      "company": "AAPL",
+      "quantity": "5",
+      "exchange": "option1",
+      "id": 3
+    },
+    {
+      "company": "AAPL",
+      "quantity": "2",
+      "exchange": "ADX",
+      "id": 4
     }
   ]
 }

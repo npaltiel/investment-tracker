@@ -53,7 +53,7 @@ export default function Home() {
     return shares;
   };
 
-  const getStockPrice = async (listing) => {
+  const getPrices = async (listing) => {
     const baseURL = "https://api.twelvedata.com";
     const endpoint = "/price";
     const symbol = listing.company;
@@ -70,9 +70,9 @@ export default function Home() {
       const responseData = await response.json();
 
       if ("price" in responseData) {
+        console.log(responseData);
         listing.price = parseFloat(responseData["price"]);
         updateShare(listing);
-        return parseFloat(responseData["price"]);
       } else {
         return null;
       }
@@ -82,11 +82,30 @@ export default function Home() {
     }
   };
 
+  const getTwelveData = async (endpoint, country) => {
+    const baseURL = "https://api.twelvedata.com";
+
+    const params = new URLSearchParams({
+      apikey: "908ae3068730422a8cc03b3b414cc2cc",
+      country: country,
+    });
+
+    try {
+      const response = await fetch(`${baseURL}${endpoint}?${params}`);
+      const responseData = await response.json();
+
+      return responseData.data;
+    } catch (error) {
+      console.error("Error:", error.message);
+      return null;
+    }
+  };
+
   return (
     <div>
       <SharesDisplay shares={filteredShares(data["shares"])} />
-      <AddShares addShare={addShares} />
-      <RefreshData data={data["shares"]} getPrice={getStockPrice} />
+      <AddShares getTwelveData={getTwelveData} addShare={addShares} />
+      <RefreshData data={data["shares"]} getPrice={getPrices} />
     </div>
   );
 }

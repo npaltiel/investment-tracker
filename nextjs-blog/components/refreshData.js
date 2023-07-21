@@ -6,7 +6,7 @@ export default function RefreshData(props) {
       const stockSymbol = listing.company;
 
       props
-        .getPrice(listing)
+        .getPrice(listing, "/price")
         .then((stockPrice) => {
           if (stockPrice !== null) {
             listing.price = stockPrice;

@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import ExchangeList from "./ExchangeList";
+import CountryDropdown from "./CountryDropdown";
+import StocksList from "./StocksList";
 
 export default function AddShares(props) {
-  const [company, setCompany] = useState(""); // should be dropdown
+  const [selectedCountry, setCountry] = useState("");
+  const [exchange, setExchange] = useState(""); // should be dropdown
+  const [company, setCompany] = useState("");
   const [quantity, setQuantity] = useState(0);
   let price = "TBD"; // API call
-  const [exchange, setExchange] = useState(""); // should be dropdown
 
   const addShareButtonPressed = () => {
     props.addShare({
+      exchange: exchange,
       company: company,
       quantity: quantity,
       price: price,
-      exchange: exchange,
     });
 
     setCompany("");
@@ -22,22 +26,26 @@ export default function AddShares(props) {
     <div>
       <h2>Add Shares</h2>
       <div>
+        <label htmlFor="country-field">Country:</label>
+        <div id="country-field">
+          <CountryDropdown CountryChange={setCountry} />
+        </div>
         <label htmlFor="exchange-field">Exchange:</label>
-        <input
-          id="exchange-field"
-          type="text"
-          className="form-control"
-          value={exchange}
-          onChange={(e) => setExchange(e.target.value)}
-        />
-        <label htmlFor="company-field">Company:</label>
-        <input
-          id="company-field"
-          type="text"
-          className="form-control"
-          value={company}
-          onChange={(e) => setCompany(e.target.value)}
-        />
+        <div id="exchange-field">
+          <ExchangeList
+            country={selectedCountry}
+            setExchange={setExchange}
+            getExchanges={props.getTwelveData}
+          />
+        </div>
+        <label htmlFor="stocks-field">Company:</label>
+        <div id="stocks-field">
+          <StocksList
+            country={selectedCountry}
+            setStocks={setCompany}
+            getStocks={props.getTwelveData}
+          />
+        </div>
         <label htmlFor="quantity-field">Quantity:</label>
         <input
           id="quantity-field"
